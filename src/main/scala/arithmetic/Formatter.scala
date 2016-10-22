@@ -1,3 +1,5 @@
+package arithmetic
+
 /**
   * Created by jeroendijkmeijer on 22/08/16.
   */
@@ -26,7 +28,7 @@ object Element {
     new LineElement(line)
 }
 
-import Element.elem
+import arithmetic.Element.elem
 abstract class Element {
   def contents:  Array[String]
   def width: Int = contents(0).length

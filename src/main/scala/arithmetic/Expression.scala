@@ -1,7 +1,9 @@
+package arithmetic
+
 /**
   * Created by jeroendijkmeijer on 29/08/16.
   */
-import Element.elem
+import arithmetic.Element.elem
 
 import scala.annotation.meta.field
 import scala.scalajs.js.annotation.{JSExport, JSExportDescendentObjects}

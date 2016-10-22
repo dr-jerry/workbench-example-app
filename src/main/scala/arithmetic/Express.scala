@@ -1,11 +1,13 @@
+package arithmetic
+
 /**
   * Created by jeroendijkmeijer on 29/08/16.
   */
 
-import scala.scalajs.js.JSApp
 import org.scalajs.dom
-import dom.document
+import org.scalajs.dom.document
 
+import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport
