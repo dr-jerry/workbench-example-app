@@ -21,7 +21,10 @@ object Express extends JSApp {
       BinOp("/", Number(1.5), Var("x")))
     val e3 = BinOp("/", e1, e2)
     def show(e: Expr) = println(f.format(e) + "\n\n")
+    def showDerive(e: Expr, to: String) =
+      show(f.derive(e, to))
     for (e <- Array(e1, e2, e3)) show(e)
+    for (e <- Array(e1, e2, e3)) showDerive(e, "x")
   }
 
   @JSExport

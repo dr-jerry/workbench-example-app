@@ -74,6 +74,30 @@ class ExprFormatter {
       }
     @JSExport
     def format(e: Expr): Element = format(e, 0)
+
+    @JSExport
+    def derive(e: Expr, to: String): Expr = {
+      val newExpr = e match {
+        case BinOp("*", left, Var(t)) => BinOp("*", Var(t), left)
+        case BinOp("+", left, Var(t)) => BinOp("*", Var(t), left)
+        case _ => e
+      }
+      e match {
+        case Var(to) => Number(1)
+        case Var(n) => Number(0)
+        case Number(n) => Number(0)
+        case BinOp("*", Number(n1), Number(n2)) => Number(0)
+        case BinOp("*", Var(to), Number(num)) => Number(num)
+        case BinOp("*", left, right) => BinOp("+", BinOp("*", derive(left, to), right)
+          , BinOp("*", left, derive(right, to)))
+        case (BinOp("/", Var(to), Number(num))) => Number(1/num)
+        case (BinOp("/", Var(to), num)) => BinOp("/", Number(1), derive(num, to))
+        case (BinOp("/", num, den)) => BinOp("/", BinOp("-", BinOp("*", derive(num, to), den)
+          , BinOp("*", num, derive(num, to))), BinOp("*", den, den))
+        case (BinOp("+", left, right)) => BinOp("+", derive(left, to), derive(right, to))
+        case (BinOp("-", left, right)) => BinOp("-", derive(left, to), derive(right, to))
+      }
+    }
   }
 
 
